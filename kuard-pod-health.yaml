@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadta:
+  name: kuard
+  spec:
+    containers:
+      - image: gcr.io/kuar-demo/kuard-amd64:blue
+        name: kuard
+        livenessProbe:
+          httpGet:
+            path: /healthy
+            port: 8080
+            initialDelaySeconds: 5
+            timeoustSecond: 1
+            periodSeconds: 10
+            failureThreshold: 3
+        ports:
+          - containers: 8080
+            name: http
+            protocol: TCP
+          
